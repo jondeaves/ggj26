@@ -135,6 +135,8 @@ public class Player : MonoBehaviour
                 if (isGrounded && rb.linearVelocity.y <= 0.1f) currentState = PlayerState.Idle;
                 break;
         }
+
+        gameObject.GetComponentInChildren<SpriteRenderer>().flipY = Physics2D.gravity.y > 0;
     }
 
     private void HorizontalMove() => rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
