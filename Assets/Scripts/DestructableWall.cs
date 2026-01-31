@@ -28,11 +28,11 @@ public class DestructableWall : MonoBehaviour
             this.DestroyWall();
 		}
 
-		// While destroying, randomize some rotation and positional movement while enabling gravity
+		// While destroying, randomize some rotation
 		if (b_IsDestroying) { 
 			foreach (GameObject childObj in m_Children)
 			{
-				childObj.transform.Rotate(0.0f, 0, 0.1f * Random.Range(-1, 1), Space.Self);
+				childObj.transform.Rotate(0.0f, 0, 0.1f * Random.Range(-3, 3), Space.Self);
 			}
 		}
 	}
@@ -47,13 +47,19 @@ public class DestructableWall : MonoBehaviour
 		b_TriggerDestroy = false;
 		b_IsDestroying = true;
 
-		foreach (GameObject childObj in m_Children)
+		gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        foreach (GameObject childObj in m_Children)
         {
 			float gravityScale = Random.Range(0.5f, 1.5f);
             childObj.GetComponent<BoxCollider2D>().enabled = false;
+            
+			// When first destroyed, randomize positional movement while enabling gravity
             childObj.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-			childObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-50f*Random.Range(0, 3), 50f * Random.Range(0, 5)));
-		}
+            childObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-150f*Random.Range(0, 3), 150f * Random.Range(0, 5)));
+			childObj.GetComponent<Rigidbody2D>().mass = 5;
+
+        }
 
 	}
 }
