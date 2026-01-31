@@ -1,10 +1,11 @@
-using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class MaskManager : MonoBehaviour
 {
+    [SerializeField] private TMP_Text maskLabel;
+
     private Dictionary<KeyCode, BaseMask> masks;
     private BaseMask activeMask;
 
@@ -61,5 +62,10 @@ public class MaskManager : MonoBehaviour
         // Activate new mask
         activeMask = newMask;
         activeMask.OnActivate(gameObject);
+
+        if (maskLabel != null)
+        {
+            maskLabel.text = $"Active Mask: {activeMask.GetType().Name}";
+        }
     }
 }
