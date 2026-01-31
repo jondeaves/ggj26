@@ -9,22 +9,27 @@ public class BaseMask : MonoBehaviour
 
     public virtual void OnActivate(GameObject player)
     {
+
         activeTimer = 0f;
         isActive = true;
+        
     }
 
     public virtual void OnDeactivate(GameObject player)
     {
+
         activeTimer = 0f;
         isActive = false;
     }
 
     public virtual void OnUpdate(GameObject player)
     {
+        /*
         activeTimer += Time.deltaTime;
         if (activeTimer >= maskDuration)
         {
             OnDeactivate(player);
         }
+        */
     }
 }
