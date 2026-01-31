@@ -167,8 +167,10 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
 
         // Check if touching a wall using two raycast
-        wallHit = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround) ||
-                    Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+        RaycastHit2D primaryWallHitCheck = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+        RaycastHit2D secondaryWallHitCheck = Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+        wallHit = primaryWallHitCheck.collider ? primaryWallHitCheck : secondaryWallHitCheck;
+
         isOnWall = wallHit.collider != null;
     }
 
