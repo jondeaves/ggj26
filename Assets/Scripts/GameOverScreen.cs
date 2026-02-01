@@ -13,6 +13,7 @@ public class GameOverScreen : MonoBehaviour
 	{
         if (VictoryScreen != null)
 		    VictoryScreen.SetActive(GameManager.Instance.PlayerWon);
+            
         
         if (LossScreen != null)
             LossScreen.SetActive(!GameManager.Instance.PlayerWon);
@@ -31,9 +32,7 @@ public class GameOverScreen : MonoBehaviour
             holdingDown = false;
             SceneManager.LoadScene("TitleScene");
         }
-        if (GameManager.Instance.PlayerWon)
-        {
-            if (SoundManager.Instance != null) SoundManager.Instance.PlayVictoryBGM();
-        }
+        
+
     }
 }
