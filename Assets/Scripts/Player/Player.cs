@@ -165,12 +165,14 @@ public class Player : MonoBehaviour
     {
         // Check if grounded - dynamically adjust ray direction based on gravity
         Vector2 downDirection = Physics2D.gravity.y < 0 ? Vector2.down : Vector2.up;
-        // Added 0.1f buffer to ensure detection when pressed against ceiling
-        isGrounded = Physics2D.Raycast(transform.position, downDirection, groundCheckDistance + 0.1f, whatIsGround);
+		// Added 0.1f buffer to ensure detection when pressed against ceiling
+		RaycastHit2D isGroundedOnGround = Physics2D.Raycast(transform.position, downDirection, groundCheckDistance + 0.1f, whatIsGround);
+		RaycastHit2D isGroundedOnWall = Physics2D.Raycast(transform.position, downDirection, groundCheckDistance + 0.1f, whatIsWall);
 
+        isGrounded = isGroundedOnGround || isGroundedOnWall;
 
-        // Check if we collide with any walls that should knock us back
-        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, Vector2.right, wallCheckDistance, whatIsWall);
+		// Check if we collide with any walls that should knock us back
+		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, Vector2.right, wallCheckDistance, whatIsWall);
         isOnWall = wallHit.collider != null;
 
         if (isOnWall && currentState != PlayerState.Hurt)
