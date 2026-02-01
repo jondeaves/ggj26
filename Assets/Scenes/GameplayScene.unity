@@ -684,6 +684,14 @@ PrefabInstance:
       propertyPath: fadeTarget
       value: 
       objectReference: {fileID: 219232796}
+    - target: {fileID: 8558442301109113988, guid: f00cb42dffe214b65a4f60916c19cdb5, type: 3}
+      propertyPath: normalXOffset
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558442301109113988, guid: f00cb42dffe214b65a4f60916c19cdb5, type: 3}
+      propertyPath: warningXOffset
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
