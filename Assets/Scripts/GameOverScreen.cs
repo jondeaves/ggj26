@@ -33,5 +33,9 @@ public class GameOverScreen : MonoBehaviour
             holdingDown = false;
             SceneManager.LoadScene("TitleScene");
         }
+        if (GameManager.Instance.PlayerWon)
+        {
+            if (SoundManager.Instance != null) SoundManager.Instance.PlayVictoryBGM();
+        }
     }
 }

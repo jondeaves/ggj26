@@ -64,6 +64,7 @@ public class EnemyController : MonoBehaviour
             if (warningTimer <= 0 && penaltyLevel == 1)
             {
                 penaltyLevel = 0; 
+                if (SoundManager.Instance != null) SoundManager.Instance.PlayNormalBGM();
             }
         }
 
@@ -89,6 +90,7 @@ public class EnemyController : MonoBehaviour
             warningTimer = warningDuration;
             cooldownTimer = fumbleCooldown;
             Debug.Log("Penalty Level 1: Maintaining constant speed 25.");
+            if (SoundManager.Instance != null) SoundManager.Instance.PlayWarningBGM();
         }
         else if (penaltyLevel == 1)
         {
@@ -121,6 +123,8 @@ public class EnemyController : MonoBehaviour
 
     private void OnCaught()
     {
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayGameOverBGM();
+        
         if (GameManager.Instance != null) GameManager.Instance.PlayerWon = false;
         SceneManager.LoadScene("GameOverScene");
     }
