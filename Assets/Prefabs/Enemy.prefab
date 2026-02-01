@@ -100,8 +100,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 797098525
-  m_SortingLayer: 0
+  m_SortingLayerID: 1391062751
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1823786323523416290, guid: e7c13d45da7cc4776b94bcfd538e078a, type: 3}
@@ -221,11 +221,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   playerScript: {fileID: 0}
-  normalXOffset: 10
+  normalXOffset: 6
   warningXOffset: 3
   constantSpeed: 25
   warningDuration: 4
-  fumbleCooldown: 1.5
+  fumbleCooldown: 3
 --- !u!1 &8752617467970232024
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ TrailRenderer:
       ctime0: 8288
       ctime1: 18119
       ctime2: 24865
-      ctime3: 65535
+      ctime3: 53585
       ctime4: 0
       ctime5: 0
       ctime6: 0
@@ -364,7 +364,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 4
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
