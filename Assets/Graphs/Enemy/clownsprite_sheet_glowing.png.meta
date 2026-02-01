@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: 52e8e88f7c6e54a9a96432ddb382d688
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4512655567746099352
+    second: clownsprite_sheet_glowing_0
+  - first:
+      213: -5851378832397082342
+    second: clownsprite_sheet_glowing_1
+  - first:
+      213: 7366216637548857849
+    second: clownsprite_sheet_glowing_2
+  - first:
+      213: -7615822288209534144
+    second: clownsprite_sheet_glowing_3
+  - first:
+      213: 4646484643221341768
+    second: clownsprite_sheet_glowing_4
+  - first:
+      213: 4287357360827813855
+    second: clownsprite_sheet_glowing_5
+  - first:
+      213: -4173703170557451755
+    second: clownsprite_sheet_glowing_6
+  - first:
+      213: 8796293700418055813
+    second: clownsprite_sheet_glowing_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 0
+        width: 138
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898e13d645c20ae30800000000000000
+      internalID: 4512655567746099352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_1
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 0
+        width: 138
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a116bb034f9bbcea0800000000000000
+      internalID: -5851378832397082342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_2
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 0
+        width: 137
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f90ca3010f0a3660800000000000000
+      internalID: 7366216637548857849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_3
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 0
+        width: 139
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043a4ceaaf92f4690800000000000000
+      internalID: -7615822288209534144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_4
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 0
+        width: 135
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84604853a21ab7040800000000000000
+      internalID: 4646484643221341768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_5
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 0
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdf4c45edc0cf7b30800000000000000
+      internalID: 4287357360827813855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_6
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 0
+        width: 143
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 512600164170416c0800000000000000
+      internalID: -4173703170557451755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clownsprite_sheet_glowing_7
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 0
+        width: 140
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58eac690486b21a70800000000000000
+      internalID: 8796293700418055813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      clownsprite_sheet_glowing_0: 4512655567746099352
+      clownsprite_sheet_glowing_1: -5851378832397082342
+      clownsprite_sheet_glowing_2: 7366216637548857849
+      clownsprite_sheet_glowing_3: -7615822288209534144
+      clownsprite_sheet_glowing_4: 4646484643221341768
+      clownsprite_sheet_glowing_5: 4287357360827813855
+      clownsprite_sheet_glowing_6: -4173703170557451755
+      clownsprite_sheet_glowing_7: 8796293700418055813
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
