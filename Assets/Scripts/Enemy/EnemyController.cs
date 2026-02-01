@@ -7,27 +7,35 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Player playerScript;
     private SpriteRenderer sr;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float offScreenXOffset = 15f; 
-    [SerializeField] private float warningXOffset = 4f;   // Distance behind player when warning
-    [SerializeField] private float chaseSpeed = 15f;      
-    [SerializeField] private float retreatSpeed = 5f;     
+    [Header("Distance Settings")]
+    [SerializeField] private float normalXOffset = 10f; 
+    [SerializeField] private float warningXOffset = 3f;   
+    
+    [Header("Speed Settings")]
+    [SerializeField] private float constantSpeed = 30f;      
 
     [Header("Punishment Settings")]
-    [SerializeField] private float warningDuration = 5.0f; // Time before enemy retreats
-    [SerializeField] private float fumbleCooldown = 1.5f;  // Invincibility window after a mistake
+    [SerializeField] private float warningDuration = 5.0f; 
+    [SerializeField] private float fumbleCooldown = 2.0f;  
     
     private float warningTimer = 0f;
     private float cooldownTimer = 0f; 
-    private int penaltyLevel = 0; // 0: Hidden, 1: Warning/Chasing, 2: Caught
+    private int penaltyLevel = 0; 
+    private float lockedYPosition;
+    private float xVelocity = 0.0f;
 
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         if (playerScript == null) playerScript = Object.FindFirstObjectByType<Player>();
         
-        // Ensure enemy starts hidden
-        SetEnemyVisibility(false);
+        lockedYPosition = transform.position.y;
+        
+        SetEnemyVisibility(true);
+        if (playerScript != null)
+        {
+            transform.position = new Vector3(playerScript.transform.position.x - normalXOffset, lockedYPosition, 0);
+        }
     }
 
     void Update()
@@ -41,17 +49,15 @@ public class EnemyController : MonoBehaviour
 
     private void HandleTimers()
     {
-        // Countdown for how long the enemy stays on screen
         if (warningTimer > 0)
         {
             warningTimer -= Time.deltaTime;
             if (warningTimer <= 0 && penaltyLevel == 1)
             {
-                penaltyLevel = 0; // Time's up, retreat
+                penaltyLevel = 0; 
             }
         }
 
-        // Countdown for the invincibility/cooldown period
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
@@ -60,7 +66,6 @@ public class EnemyController : MonoBehaviour
 
     private void HandleLogic()
     {
-        // Trigger mistake logic only if player is Hurt and NOT in cooldown
         if (playerScript.CurrentState == PlayerState.Hurt && cooldownTimer <= 0)
         {
             OnPlayerFumble();
@@ -71,45 +76,33 @@ public class EnemyController : MonoBehaviour
     {
         if (penaltyLevel == 0)
         {
-            // First Fumble: Summon the enemy to chase
             penaltyLevel = 1;
             warningTimer = warningDuration;
-            cooldownTimer = fumbleCooldown; // Start invincibility window
-            SetEnemyVisibility(true);
-            Debug.Log("Warning: Enemy summoned. Invincibility active.");
+            cooldownTimer = fumbleCooldown;
+            Debug.Log("Penalty Level 1: Maintaining constant speed 25.");
         }
         else if (penaltyLevel == 1)
         {
-            // Second Fumble: Catch the player (only triggers if cooldown has expired)
             penaltyLevel = 2;
             OnCaught();
         }
     }
-
     private void MoveEnemy()
     {
-        float targetXOffset;
+        float playerX = playerScript.transform.position.x;
+        float currentTargetOffset;
 
         if (penaltyLevel == 2) 
-            targetXOffset = 0f; // Catching position
+            currentTargetOffset = 0f; 
         else if (penaltyLevel == 1) 
-            targetXOffset = -warningXOffset; // Warning position
+            currentTargetOffset = warningXOffset; 
         else 
-            targetXOffset = -offScreenXOffset; // Hidden position
+            currentTargetOffset = normalXOffset; 
 
-        // Calculate target position based on Player's current position and gravity-ready Y
-        Vector3 targetPos = new Vector3(playerScript.transform.position.x + targetXOffset, playerScript.transform.position.y, 0);
+        float targetX = playerX - currentTargetOffset;
         
-        float currentSpeed = (penaltyLevel > 0) ? chaseSpeed : retreatSpeed;
-        
-        // Smoothly interpolate towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, currentSpeed * Time.deltaTime);
-
-        // Turn off visibility once retreated far enough
-        if (penaltyLevel == 0 && Vector3.Distance(transform.position, targetPos) < 0.5f)
-        {
-            SetEnemyVisibility(false);
-        }
+        float newX = Mathf.SmoothDamp(transform.position.x, targetX, ref xVelocity, 0.3f, constantSpeed);
+        transform.position = new Vector3(newX, lockedYPosition, transform.position.z);
     }
 
     private void SetEnemyVisibility(bool visible)
@@ -119,7 +112,9 @@ public class EnemyController : MonoBehaviour
 
     private void OnCaught()
     {
-        GameManager.Instance.PlayerWon = false;
+        if (GameManager.Instance != null) GameManager.Instance.PlayerWon = false;
         SceneManager.LoadScene("GameOverScene");
     }
 }
+
+
