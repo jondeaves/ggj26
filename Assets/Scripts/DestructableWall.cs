@@ -57,13 +57,13 @@ public class DestructableWall : MonoBehaviour
 
         foreach (GameObject childObj in m_Children)
         {
-			float gravityScale = Random.Range(0.5f, 1.5f);
+			float gravityScale = Random.Range(2f, 4f);
             childObj.GetComponent<BoxCollider2D>().enabled = false;
             
 			// When first destroyed, randomize positional movement while enabling gravity
             childObj.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-            childObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-150f*Random.Range(0, 3), 150f * Random.Range(0, 5)));
-			childObj.GetComponent<Rigidbody2D>().mass = 5;
+            childObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-150f*Random.Range(1, 5), 150f * Random.Range(2, 6)));
+			childObj.GetComponent<Rigidbody2D>().mass = 2;
 
         }
 

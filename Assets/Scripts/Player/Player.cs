@@ -179,8 +179,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TriggerKnockback()
+    private void TriggerKnockback(GameObject hitWall)
     {
+        // First check if we have the smashing mask on and if the wall is breakable
+        MaskManager maskManager = GetComponent<MaskManager>();
+        if (maskManager.ActiveMask != null)
+        {
+            bool isSmashing = maskManager.ActiveMask.GetType().Name == "SmashMask";
+            bool isBreakableWall = hitWall.GetComponent<DestructableWall>() != null;
+            if (isSmashing && isBreakableWall)
+            {
+                hitWall.GetComponent<DestructableWall>().TriggerDestruction();
+                return;
+            }
+        }
+
         float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
 
         currentState = PlayerState.Hurt;
