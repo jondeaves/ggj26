@@ -363,6 +363,7 @@ MonoBehaviour:
   interactKey: 101
   moveSpeed: 8
   jumpForce: 12
+  boostMultiplier: 1
   groundCheckDistance: 0.95
   wallCheckDistance: 0.66
   whatIsGround:

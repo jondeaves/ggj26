@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private int facingDir = 1;
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float jumpForce = 12f;
+    [HideInInspector] public float boostMultiplier = 1f;
 
     [Header("Collision details")]
     [SerializeField] private float groundCheckDistance;
@@ -139,7 +140,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HorizontalMove() => rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+    private void HorizontalMove() => rb.linearVelocity = new Vector2(moveSpeed * boostMultiplier, rb.linearVelocity.y);
 
     private void Jump()
     {

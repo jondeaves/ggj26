@@ -9,14 +9,14 @@ public class SmashMask : BaseMask
     public override void OnActivate(GameObject player) {
         base.OnActivate(player);
 
-        // TODO: Increase player speed slightly
+        player.GetComponent<Player>().boostMultiplier = speedBoost;
     }
 
     public override void OnDeactivate(GameObject player) {
         base.OnDeactivate(player);
-        
-        // TODO: Slow player back down
-    }
+
+		player.GetComponent<Player>().boostMultiplier = 1f;
+	}
 
     public override void OnUpdate(GameObject player)
     {

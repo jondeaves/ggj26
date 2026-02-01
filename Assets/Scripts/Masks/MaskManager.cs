@@ -16,8 +16,8 @@ public class MaskManager : MonoBehaviour
     {
         masks = new Dictionary<KeyCode, BaseMask>
         {
-            { KeyCode.A, gameObject.AddComponent<FlipGravityMask>() },
-            { KeyCode.S, gameObject.AddComponent<SmashMask>() }
+            { KeyCode.Alpha1, gameObject.AddComponent<FlipGravityMask>() },
+            { KeyCode.Alpha2, gameObject.AddComponent<SmashMask>() }
         };
 
         maskIcons = new Dictionary<string, Image>();
