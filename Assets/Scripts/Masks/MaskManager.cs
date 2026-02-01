@@ -42,6 +42,11 @@ public class MaskManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsGameFinished)
+        {
+            return;
+        }
+
         if (GetComponent<Player>().CurrentState != PlayerState.Hurt)
         {
             foreach (var item in masks)

@@ -55,6 +55,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameFinished)
+        {
+            rb.linearVelocity = Vector2.zero;
+            anim.SetBool("IsComplete", true);
+
+			return;
+        }
+
         HandleCollision();
         HandleInput();
         HandleState();

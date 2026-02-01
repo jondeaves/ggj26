@@ -6,18 +6,16 @@ public class GameOverScreen : MonoBehaviour
 {
     private bool holdingDown = false;
 
-    [SerializeField] private TMP_Text resultText;
+    [SerializeField] private GameObject VictoryScreen;
+	[SerializeField] private GameObject LossScreen;
 
-    private void Start()
-    {
-        if (GameManager.Instance.PlayerWon)
-        {
-            resultText.text = "You Win!";
-        }
-        else
-        {
-            resultText.text = "Game Over";
-        }
+	private void Start()
+	{
+        if (VictoryScreen != null)
+		    VictoryScreen.SetActive(GameManager.Instance.PlayerWon);
+        
+        if (LossScreen != null)
+            LossScreen.SetActive(!GameManager.Instance.PlayerWon);
     }
 
     // Update is called once per frame
