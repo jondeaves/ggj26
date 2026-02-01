@@ -11,6 +11,8 @@ public class MaskManager : MonoBehaviour
 
     private Dictionary<string, Image> maskIcons;
 
+    public BaseMask ActiveMask { get { return activeMask; } }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

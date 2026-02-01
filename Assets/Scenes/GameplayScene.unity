@@ -1449,10 +1449,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Destructable Wall
       objectReference: {fileID: 0}
-    - target: {fileID: 3273529648822115371, guid: 65496e458b09d7041842f23101670e7c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7187628393181942349, guid: 65496e458b09d7041842f23101670e7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.554745
