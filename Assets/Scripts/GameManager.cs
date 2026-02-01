@@ -3,8 +3,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool PlayerWon = false;
+    public float GameStartDelayTime = 2f;
 
-    public static GameManager Instance { get; private set; }
+	public static GameManager Instance { get; private set; }
 
     void Awake()
     {

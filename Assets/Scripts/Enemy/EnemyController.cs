@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     private float lockedYPosition;
     private float xVelocity = 0.0f;
 
+    private float delayTimer = 0f;
+
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -42,7 +44,14 @@ public class EnemyController : MonoBehaviour
     {
         if (playerScript == null) return;
 
-        HandleTimers();
+
+        delayTimer += Time.deltaTime;
+        if (delayTimer < GameManager.Instance.GameStartDelayTime)
+        {
+            return;
+        }
+
+		HandleTimers();
         HandleLogic();
         MoveEnemy();
     }
