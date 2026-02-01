@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using static Unity.VisualScripting.Metadata;
 
 public class DestructableWall : MonoBehaviour
 {
