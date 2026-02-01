@@ -30,6 +30,7 @@ public class Exit : MonoBehaviour
 		if (exitFadeTimer > GameManager.Instance.exitFadeTime)
 		{
 			SceneManager.LoadScene("GameOverScene");
+            if (SoundManager.Instance != null) SoundManager.Instance.PlayVictoryBGM();
 		}
     }
 
@@ -43,6 +44,7 @@ public class Exit : MonoBehaviour
             if (fadeTarget == null)
 			{
 				SceneManager.LoadScene("GameOverScene");
+                if (SoundManager.Instance != null) SoundManager.Instance.PlayVictoryBGM();
 			}
 
             exitFadeTimer = 0f;
