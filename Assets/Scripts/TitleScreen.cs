@@ -5,11 +5,6 @@ public class TitleScreen : MonoBehaviour
 {
     private bool holdingDown = false;
 
-    private void Awake()
-    {
-        GameManager.Instance.PlayerWon = false;
-    }
-
     // Update is called once per frame
     void Update()
     {
