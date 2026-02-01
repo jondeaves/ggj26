@@ -56,6 +56,11 @@ public class MaskManager : MonoBehaviour
                     ActivateMask(item.Value);
                 }
             }
+        } else if(activeMask)
+        {
+            // When hurt, remove mask
+            // TODO: There is a bug where player flies vertically down below the boundaries
+            //activeMask.OnDeactivate(gameObject);
         }
 
         if (activeMask != null)
