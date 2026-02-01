@@ -270,15 +270,16 @@ MonoBehaviour:
   interactKey: 101
   moveSpeed: 8
   jumpForce: 12
-  wallSlideFallSpeed: -0.3
-  wallJumpDirection: {x: 1, y: 2}
   groundCheckDistance: 0.95
   wallCheckDistance: 0.66
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  primaryWallCheck: {fileID: 1920116790094541992}
-  secondaryWallCheck: {fileID: 1390664172887980807}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128
+  knockbackTime: 0.5
+  knockbackDistance: 3
 --- !u!50 &88440554143702451
 Rigidbody2D:
   serializedVersion: 5

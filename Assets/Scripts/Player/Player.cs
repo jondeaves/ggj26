@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float knockbackDistance = 3f;
     private Vector2 knockbackTarget;
 
-
 	private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

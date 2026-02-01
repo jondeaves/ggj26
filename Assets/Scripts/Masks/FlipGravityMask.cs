@@ -13,7 +13,6 @@ public class FlipGravityMask : BaseMask
     public override void OnActivate(GameObject player)
     {
         // Flip gravity
-        Debug.Log("Gravity is " + baseGravityScale);
         Physics2D.gravity = new Vector2(0, -baseGravityScale);
 
         // Give the player a little 'nudge' in the right direction

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - DestructableWall
+  - MaskIcon
   layers:
   - Default
   - TransparentFX
