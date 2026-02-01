@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
             deathTimer += Time.deltaTime;
 
 			float fadePercentage = deathTimer / (GameManager.Instance.exitFadeTime - 0.2f);
-			fadeTarget.color = Color.black.WithAlpha(fadePercentage);
+			fadeTarget.color = new Color(0, 0, 0, fadePercentage);
 
 			if (deathTimer > GameManager.Instance.exitFadeTime)
 			{

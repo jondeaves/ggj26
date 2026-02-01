@@ -25,7 +25,7 @@ public class Exit : MonoBehaviour
         exitFadeTimer += Time.deltaTime;
 
         float fadePercentage = exitFadeTimer / (GameManager.Instance.exitFadeTime - 0.2f);
-        fadeTarget.color = Color.white.WithAlpha(fadePercentage);
+        fadeTarget.color = new Color(255, 255, 255, fadePercentage);
 
 		if (exitFadeTimer > GameManager.Instance.exitFadeTime)
 		{
