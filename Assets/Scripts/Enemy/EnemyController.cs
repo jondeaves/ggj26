@@ -148,7 +148,12 @@ public class EnemyController : MonoBehaviour
             GameManager.Instance.PlayerWon = false;
             GameManager.Instance.IsGameFinished = true;
 		}
-    }
+
+		if (fadeTarget == null)
+		{
+			SceneManager.LoadScene("GameOverScene");
+		}
+	}
 }
 
 
