@@ -8,6 +8,11 @@ public class TitleScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Alpha0))
+        {
+            SceneManager.LoadScene("OldGameplayScene");
+        }
+        
         if (Input.anyKey)
         {
             holdingDown = true;
