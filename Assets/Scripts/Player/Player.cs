@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         sr = GetComponentInChildren<SpriteRenderer>();
-        UpdateMaskVisual(); // Initialize visual state
     }
 
     private void Update()
@@ -80,13 +79,6 @@ public class Player : MonoBehaviour
     private void SwitchMask()
     {
         currentMask = (currentMask == MaskType.Mask1) ? MaskType.Mask2 : MaskType.Mask1;
-        UpdateMaskVisual();
-    }
-
-    private void UpdateMaskVisual()
-    {
-        // Provide visual feedback for the current mask
-        sr.color = (currentMask == MaskType.Mask1) ? MaskColor1 : MaskColor2;
     }
 
     private void TryDestroyWall()
@@ -145,8 +137,6 @@ public class Player : MonoBehaviour
                 transform.position = Vector2.Lerp(transform.position, knockbackTarget, (knockbackTime / 2) * Time.deltaTime);
 				break;
         }
-
-        gameObject.GetComponentInChildren<SpriteRenderer>().flipY = Physics2D.gravity.y > 0;
     }
 
     private void HorizontalMove() => rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);

@@ -55,6 +55,14 @@ public class MaskManager : MonoBehaviour
 		{
 			maskIcon.Value.color = new Color(255, 255, 255, activeMask != null && activeMask.GetType().Name == maskIcon.Key ? 1f : 0.5f);
 		}
+
+		foreach (Transform child in gameObject.transform)
+		{
+            if (child.gameObject.name.IndexOf("Mask") == -1)
+                continue;
+
+            child.gameObject.SetActive(activeMask && child.gameObject.name == activeMask.GetType().Name);
+		}
 	}
 
     private void ActivateMask(BaseMask newMask)

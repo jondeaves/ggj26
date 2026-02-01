@@ -17,6 +17,7 @@ public class FlipGravityMask : BaseMask
 
         // Give the player a little 'nudge' in the right direction
         player.GetComponent<Rigidbody2D>().AddForceY(1000f);
+        player.transform.Rotate(new Vector3(1, 0, 0), 180);
 
         base.OnActivate(player);
     }
@@ -28,7 +29,8 @@ public class FlipGravityMask : BaseMask
 
         // Give the player a little 'nudge' in the right direction
         player.GetComponent<Rigidbody2D>().AddForceY(-1000f);
+		player.transform.Rotate(new Vector3(1, 0, 0), 180);
 
-        base.OnDeactivate(player);
+		base.OnDeactivate(player);
     }
 }
