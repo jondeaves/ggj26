@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private bool isOnWall;
     private RaycastHit2D wallHit; // Stores the hit info for the wall in front
 
-    private PlayerState currentState = PlayerState.Idle;
+    public PlayerState currentState = PlayerState.Idle;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackTime = 0.5f;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float knockbackDistance = 3f;
     private Vector2 knockbackTarget;
 
-	private void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
 
                 // TODO: Add some vertical
                 transform.position = Vector2.Lerp(transform.position, knockbackTarget, (knockbackTime / 2) * Time.deltaTime);
-				break;
+                break;
         }
     }
 
@@ -178,17 +178,17 @@ public class Player : MonoBehaviour
     }
 
     private void TriggerKnockback()
-	{
-		float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
+    {
+        float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
 
-		currentState = PlayerState.Hurt;
+        currentState = PlayerState.Hurt;
         rb.linearVelocity = new Vector2(0, (jumpForce / 3) * -gravityDirection);
         
         knockbackTimer = 0f;
         knockbackTarget = new Vector2(transform.position.x - knockbackDistance, transform.position.y);
 
         // TODO: Hurt animation
-	}
+    }
 
     private void FinishKnockback()
     {
