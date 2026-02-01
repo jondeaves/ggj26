@@ -34,7 +34,14 @@ public class DestructableWall : MonoBehaviour
 			{
 				childObj.transform.Rotate(0.0f, 0, 0.1f * Random.Range(-3, 3), Space.Self);
 			}
-		}
+		} else
+		{
+            // If not destroying, flip the gravity scale to ensure boxes don't fall when gravity is flipped
+            foreach (GameObject childObj in m_Children)
+            {
+                childObj.GetComponent<Rigidbody2D>().gravityScale = Physics2D.gravity.y > 0 ? -1f : 1f;
+            }
+        }
 	}
 
 	public void TriggerDestruction()

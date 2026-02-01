@@ -36,11 +36,14 @@ public class MaskManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var item in masks)
+        if (GetComponent<Player>().CurrentState != PlayerState.Hurt)
         {
-            if (Input.GetKeyUp(item.Key))
+            foreach (var item in masks)
             {
-                ActivateMask(item.Value);
+                if (Input.GetKeyUp(item.Key))
+                {
+                    ActivateMask(item.Value);
+                }
             }
         }
 

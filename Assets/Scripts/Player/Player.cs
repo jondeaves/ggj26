@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float knockbackDistance = 3f;
     private Vector2 knockbackTarget;
 
+    public PlayerState CurrentState {  get {  return currentState; } }
+
 	private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -134,7 +136,6 @@ public class Player : MonoBehaviour
                     FinishKnockback();
                 }
 
-                // TODO: Add some vertical
                 transform.position = Vector2.Lerp(transform.position, knockbackTarget, (knockbackTime / 2) * Time.deltaTime);
 				break;
         }
