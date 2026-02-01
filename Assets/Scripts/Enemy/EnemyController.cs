@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -118,7 +119,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnCaught()
     {
-        Debug.LogError("GAME OVER - PLAYER CAUGHT!");
-        // TODO: Add game over UI, restart scene, or stop time
+        GameManager.Instance.PlayerWon = false;
+        SceneManager.LoadScene("GameOverScene");
     }
 }
