@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class EnemyController : MonoBehaviour
 
     private float delayTimer = 0f;
 
+	[SerializeField] private Image fadeTarget;
+	private float deathTimer = 0f;
+
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -42,7 +47,20 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (playerScript == null || GameManager.Instance.IsGameFinished) return;
+        if (GameManager.Instance.IsGameFinished && !GameManager.Instance.PlayerWon && fadeTarget != null) {
+            //
+            //SceneManager.LoadScene("GameOverScene");
+            deathTimer += Time.deltaTime;
+
+			float fadePercentage = deathTimer / (GameManager.Instance.exitFadeTime - 0.2f);
+			fadeTarget.color = Color.black.WithAlpha(fadePercentage);
+
+			if (deathTimer > GameManager.Instance.exitFadeTime)
+			{
+				SceneManager.LoadScene("GameOverScene");
+			}
+		}
+		if (playerScript == null || GameManager.Instance.IsGameFinished) return;
 
 
         delayTimer += Time.deltaTime;
@@ -124,10 +142,18 @@ public class EnemyController : MonoBehaviour
     private void OnCaught()
     {
         if (SoundManager.Instance != null) SoundManager.Instance.PlayGameOverBGM();
-        
-        if (GameManager.Instance != null) GameManager.Instance.PlayerWon = false;
-        SceneManager.LoadScene("GameOverScene");
-    }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PlayerWon = false;
+            GameManager.Instance.IsGameFinished = true;
+		}
+
+		if (fadeTarget == null)
+		{
+			SceneManager.LoadScene("GameOverScene");
+		}
+	}
 }
 
 
