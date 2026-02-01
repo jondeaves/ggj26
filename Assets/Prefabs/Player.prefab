@@ -372,8 +372,8 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
-  knockbackTime: 0.5
-  knockbackDistance: 3
+  knockbackTime: 2
+  knockbackDistance: 6
 --- !u!50 &88440554143702451
 Rigidbody2D:
   serializedVersion: 5
