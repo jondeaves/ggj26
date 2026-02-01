@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public bool PlayerWon = false;
     public float GameStartDelayTime = 2f;
+    public bool IsGameFinished = false;
 
 	public static GameManager Instance { get; private set; }
 

@@ -1,8 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Exit : MonoBehaviour
 {
+    [SerializeField] private Image fadeTarget;
+    [SerializeField] private float exitFadeTime = 2f;
+    private float exitFadeTimer = 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,15 +18,36 @@ public class Exit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!GameManager.Instance.IsGameFinished)
+        {
+            return;
+        }
+
+        exitFadeTimer += Time.deltaTime;
+
+        float fadePercentage = exitFadeTimer / (exitFadeTime - 0.2f);
+        fadeTarget.color = Color.white.WithAlpha(fadePercentage);
+
+		// TODO: Fade based on fade timer percentage
+		if (exitFadeTimer > exitFadeTime)
+		{
+			SceneManager.LoadScene("GameOverScene");
+		}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (!GameManager.Instance.IsGameFinished && collision.CompareTag("Player"))
 		{
 			GameManager.Instance.PlayerWon = true;
-			SceneManager.LoadScene("GameOverScene");
+            GameManager.Instance.IsGameFinished = true;
+
+            if (fadeTarget == null)
+			{
+				SceneManager.LoadScene("GameOverScene");
+			}
+
+            exitFadeTimer = 0f;
 		}
     }
 }

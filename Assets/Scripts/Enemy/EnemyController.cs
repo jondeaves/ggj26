@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (playerScript == null) return;
+        if (playerScript == null || GameManager.Instance.IsGameFinished) return;
 
 
         delayTimer += Time.deltaTime;
