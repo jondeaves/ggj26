@@ -36,7 +36,15 @@ public class Player : MonoBehaviour
 
     private PlayerState currentState = PlayerState.Idle;
 
-    private void Awake()
+    [Header("Knockback")]
+    [SerializeField] private float knockbackTime = 0.5f;
+    private float knockbackTimer = 0f;
+
+    [SerializeField] private float knockbackDistance = 3f;
+    private Vector2 knockbackTarget;
+
+
+	private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -54,6 +62,9 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
+        if (currentState == PlayerState.Hurt)
+            return;
+
         // Switch Mask color
         if (Input.GetKeyDown(switchKey)) SwitchMask();
 
@@ -82,33 +93,33 @@ public class Player : MonoBehaviour
     private void TryDestroyWall()
     {
         // Only proceed if HandleCollision detects a wall
-        //if (isOnWall && wallHit.collider != null)
-        //{
-        //    string wallTag = wallHit.collider.tag;
-        //    bool canBreak = false;
+        if (isOnWall && wallHit.collider != null)
+        {
+            string wallTag = wallHit.collider.tag;
+            bool canBreak = false;
 
-        //    // Logic: Red Mask (Mask1) breaks Blue Walls, Blue Mask (Mask2) breaks Red Walls
-        //    if (currentMask == MaskType.Mask1 && wallTag == "Wall2") canBreak = true;
-        //    if (currentMask == MaskType.Mask2 && wallTag == "Wall1") canBreak = true;
+            // Logic: Red Mask (Mask1) breaks Blue Walls, Blue Mask (Mask2) breaks Red Walls
+            if (currentMask == MaskType.Mask1 && wallTag == "Wall2") canBreak = true;
+            if (currentMask == MaskType.Mask2 && wallTag == "Wall1") canBreak = true;
 
-        //    if (canBreak)
-        //    {
-        //        DestructableWall wallScript = wallHit.collider.GetComponent<DestructableWall>();
-        //        if (wallScript != null)
-        //        {
-        //            wallScript.TriggerDestruction();
+            if (canBreak)
+            {
+                DestructableWall wallScript = wallHit.collider.GetComponent<DestructableWall>();
+                if (wallScript != null)
+                {
+                    wallScript.TriggerDestruction();
 
-        //            // Disable the main collider so it no longer blocks the player
-        //            wallHit.collider.enabled = false;
-        //            Debug.Log("Wall destroyed via opposite color!");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Wrong color mask! Cannot break this wall.");
-        //        // Placeholder for alerting the enemy
-        //    }
-        //}
+                    // Disable the main collider so it no longer blocks the player
+                    wallHit.collider.enabled = false;
+                    Debug.Log("Wall destroyed via opposite color!");
+                }
+            }
+            else
+            {
+                Debug.Log("Wrong color mask! Cannot break this wall.");
+                // Placeholder for alerting the enemy
+            }
+        }
     }
 
 
@@ -125,9 +136,15 @@ public class Player : MonoBehaviour
                 if (isGrounded) currentState = PlayerState.Idle;
                 break;
             case PlayerState.Hurt:
-                //if (isGrounded) rb.linearVelocity = Vector2.zero;
-                // TODO: Track timer for how longer player is not moving, show some sort of hurt animation?
-                break;
+                knockbackTimer += Time.deltaTime;
+                if (knockbackTimer >= knockbackTime)
+                {
+                    FinishKnockback();
+                }
+
+                // TODO: Add some vertical
+                transform.position = Vector2.Lerp(transform.position, knockbackTarget, 1f * Time.deltaTime);
+				break;
         }
 
         gameObject.GetComponentInChildren<SpriteRenderer>().flipY = Physics2D.gravity.y > 0;
@@ -171,11 +188,23 @@ public class Player : MonoBehaviour
     }
 
     private void TriggerKnockback()
+	{
+		float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
+
+		currentState = PlayerState.Hurt;
+        rb.linearVelocity = new Vector2(0, (jumpForce / 3) * -gravityDirection);
+        
+        knockbackTimer = 0f;
+        knockbackTarget = new Vector2(transform.position.x - knockbackDistance, transform.position.y);
+
+        // TODO: Hurt animation
+	}
+
+    private void FinishKnockback()
     {
-        currentState = PlayerState.Hurt;
-        float knockbackDir = facingDir * -1f;
-        //rb.linearVelocity = Vector2.zero;
-        rb.AddForce(new Vector2(knockbackDir * (moveSpeed/2), jumpForce/3), ForceMode2D.Impulse);
+        currentState = PlayerState.Idle;
+        
+        // TODO: Running animation
     }
 
     private void OnDrawGizmos()

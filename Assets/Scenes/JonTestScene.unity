@@ -806,6 +806,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1874222776081369167, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
+      propertyPath: knockbackTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874222776081369167, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
       propertyPath: whatIsWall.m_Bits
       value: 128
       objectReference: {fileID: 0}
