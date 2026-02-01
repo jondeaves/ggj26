@@ -14,10 +14,13 @@ public class GameOverScreen : MonoBehaviour
         if (VictoryScreen != null)
 		    VictoryScreen.SetActive(GameManager.Instance.PlayerWon);
             
-        
         if (LossScreen != null)
             LossScreen.SetActive(!GameManager.Instance.PlayerWon);
-    }
+
+        GameManager.Instance.PlayerWon = false;
+		GameManager.Instance.IsGameFinished = false;
+
+	}
 
     // Update is called once per frame
     void Update()
