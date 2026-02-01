@@ -35,7 +35,9 @@ public class Player : MonoBehaviour
     private bool isOnWall;
     private RaycastHit2D wallHit; // Stores the hit info for the wall in front
 
-    public PlayerState currentState = PlayerState.Idle;
+    private PlayerState currentState = PlayerState.Idle;
+
+    public PlayerState CurrentState { get { return currentState; } }
 
     [Header("Knockback")]
     [SerializeField] private float knockbackTime = 0.5f;

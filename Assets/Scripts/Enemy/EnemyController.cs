@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour
     private void HandleLogic()
     {
         // Trigger mistake logic only if player is Hurt and NOT in cooldown
-        if (playerScript.currentState == PlayerState.Hurt && cooldownTimer <= 0)
+        if (playerScript.CurrentState == PlayerState.Hurt && cooldownTimer <= 0)
         {
             OnPlayerFumble();
         }
