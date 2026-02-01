@@ -38,7 +38,6 @@ public class SoundManager : MonoBehaviour
         if (audioSource.clip != normalBGM) SwitchBGM(normalBGM, true);
     }
 
-    // 播放失误紧张音乐
     public void PlayWarningBGM()
     {
         if (audioSource.clip != warningBGM) SwitchBGM(warningBGM, true);
