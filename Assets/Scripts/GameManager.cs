@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool PlayerWon = false;
-    public float GameStartDelayTime = 2f;
+	[SerializeField] public float exitFadeTime = 2f;
+	[SerializeField] public float GameStartDelayTime = 2f;
+
+	public bool PlayerWon = false;
     public bool IsGameFinished = false;
 
 	public static GameManager Instance { get; private set; }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Exit : MonoBehaviour
 {
     [SerializeField] private Image fadeTarget;
-    [SerializeField] private float exitFadeTime = 2f;
     private float exitFadeTimer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,11 +24,10 @@ public class Exit : MonoBehaviour
 
         exitFadeTimer += Time.deltaTime;
 
-        float fadePercentage = exitFadeTimer / (exitFadeTime - 0.2f);
+        float fadePercentage = exitFadeTimer / (GameManager.Instance.exitFadeTime - 0.2f);
         fadeTarget.color = Color.white.WithAlpha(fadePercentage);
 
-		// TODO: Fade based on fade timer percentage
-		if (exitFadeTimer > exitFadeTime)
+		if (exitFadeTimer > GameManager.Instance.exitFadeTime)
 		{
 			SceneManager.LoadScene("GameOverScene");
 		}
