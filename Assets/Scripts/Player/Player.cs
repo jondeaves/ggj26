@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
                 }
 
                 // TODO: Add some vertical
-                transform.position = Vector2.Lerp(transform.position, knockbackTarget, 1f * Time.deltaTime);
+                transform.position = Vector2.Lerp(transform.position, knockbackTarget, (knockbackTime / 2) * Time.deltaTime);
 				break;
         }
 

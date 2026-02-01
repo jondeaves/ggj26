@@ -805,9 +805,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 88440554143702451, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
+      propertyPath: m_Mass
+      value: 2.1116347
+      objectReference: {fileID: 0}
+    - target: {fileID: 88440554143702451, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1874222776081369167, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
       propertyPath: knockbackTime
-      value: 1.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874222776081369167, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
+      propertyPath: knockbackDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1874222776081369167, guid: 44d1e6ddf1835c14c8719699bdbb9446, type: 3}
       propertyPath: whatIsWall.m_Bits
