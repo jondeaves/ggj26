@@ -287,14 +287,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.108134575, b: 0.3133791, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2035776848411572529, guid: bfab6a0ff6c83264291b25cb592c26d4, type: 3}
+  m_Sprite: {fileID: -3718763337147400751, guid: 9a1798d5d22250a459c73dd0fc380de4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
