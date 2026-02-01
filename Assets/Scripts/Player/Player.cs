@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
 
         if (isOnWall && currentState != PlayerState.Hurt)
         {
-            TriggerKnockback();
+            TriggerKnockback(wallHit.collider.gameObject);
         }
     }
 
