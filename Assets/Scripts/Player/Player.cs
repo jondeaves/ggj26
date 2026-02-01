@@ -23,15 +23,12 @@ public class Player : MonoBehaviour
     private int facingDir = 1;
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float jumpForce = 12f;
-    [SerializeField] private float wallSlideFallSpeed = -0.3f;
-    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1, 2);
 
     [Header("Collision details")]
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Transform primaryWallCheck;
-    [SerializeField] private Transform secondaryWallCheck;
+    [SerializeField] private LayerMask whatIsWall;
     
     private bool isGrounded;
     private bool isOnWall;
@@ -39,7 +36,15 @@ public class Player : MonoBehaviour
 
     private PlayerState currentState = PlayerState.Idle;
 
-    private void Awake()
+    [Header("Knockback")]
+    [SerializeField] private float knockbackTime = 0.5f;
+    private float knockbackTimer = 0f;
+
+    [SerializeField] private float knockbackDistance = 3f;
+    private Vector2 knockbackTarget;
+
+
+	private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -57,6 +62,9 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
+        if (currentState == PlayerState.Hurt)
+            return;
+
         // Switch Mask color
         if (Input.GetKeyDown(switchKey)) SwitchMask();
 
@@ -67,15 +75,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded) Jump();
-            else if (isOnWall && !isGrounded) WallJump();
-        }
-
-        // Wall Slide Logic
-        // Added gravity direction check for wall slide logic
-        float gravityDir = Mathf.Sign(Physics2D.gravity.y);
-        if (!Input.GetKey(KeyCode.S) && !isGrounded && isOnWall && (rb.linearVelocity.y * gravityDir) < 0)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, wallSlideFallSpeed));
         }
     }
 
@@ -109,9 +108,9 @@ public class Player : MonoBehaviour
                 if (wallScript != null)
                 {
                     wallScript.TriggerDestruction();
-                    
+
                     // Disable the main collider so it no longer blocks the player
-                    wallHit.collider.enabled = false; 
+                    wallHit.collider.enabled = false;
                     Debug.Log("Wall destroyed via opposite color!");
                 }
             }
@@ -128,7 +127,7 @@ public class Player : MonoBehaviour
     {
         switch (currentState)
         {
-            case PlayerState.Idle: 
+            case PlayerState.Idle:
                 HorizontalMove(); 
                 break;
             case PlayerState.Jumping:
@@ -136,6 +135,16 @@ public class Player : MonoBehaviour
                 // Return to idle once landed - simplified for gravity compatibility
                 if (isGrounded) currentState = PlayerState.Idle;
                 break;
+            case PlayerState.Hurt:
+                knockbackTimer += Time.deltaTime;
+                if (knockbackTimer >= knockbackTime)
+                {
+                    FinishKnockback();
+                }
+
+                // TODO: Add some vertical
+                transform.position = Vector2.Lerp(transform.position, knockbackTarget, 1f * Time.deltaTime);
+				break;
         }
 
         gameObject.GetComponentInChildren<SpriteRenderer>().flipY = Physics2D.gravity.y > 0;
@@ -149,15 +158,6 @@ public class Player : MonoBehaviour
         // Adjust jump direction based on current gravity
         float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * -gravityDirection);
-    }
-
-    private void WallJump()
-    {
-        currentState = PlayerState.Jumping;
-        // Adjust wall jump Y-force based on current gravity
-        float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
-        Vector2 force = new Vector2(wallJumpDirection.x * -facingDir, wallJumpDirection.y * -gravityDirection);
-        rb.linearVelocity = new Vector2(force.x * jumpForce, force.y * jumpForce);
     }
 
     private void HandleAnimations()
@@ -177,24 +177,43 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, downDirection, groundCheckDistance + 0.1f, whatIsGround);
 
 
-        // Check if touching a wall using two raycast
-        RaycastHit2D primaryWallHitCheck = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
-        RaycastHit2D secondaryWallHitCheck = Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
-        wallHit = primaryWallHitCheck.collider ? primaryWallHitCheck : secondaryWallHitCheck;
-
+        // Check if we collide with any walls that should knock us back
+        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, Vector2.right, wallCheckDistance, whatIsWall);
         isOnWall = wallHit.collider != null;
+
+        if (isOnWall && currentState != PlayerState.Hurt)
+        {
+            TriggerKnockback();
+        }
+    }
+
+    private void TriggerKnockback()
+	{
+		float gravityDirection = Mathf.Sign(Physics2D.gravity.y);
+
+		currentState = PlayerState.Hurt;
+        rb.linearVelocity = new Vector2(0, (jumpForce / 3) * -gravityDirection);
+        
+        knockbackTimer = 0f;
+        knockbackTarget = new Vector2(transform.position.x - knockbackDistance, transform.position.y);
+
+        // TODO: Hurt animation
+	}
+
+    private void FinishKnockback()
+    {
+        currentState = PlayerState.Idle;
+        
+        // TODO: Running animation
     }
 
     private void OnDrawGizmos()
     {
         // Visual debug lines in the Scene view
         Gizmos.color = Color.yellow;
+
         // Corrected Gizmo direction to match gravity
         float gravityDir = Physics2D.gravity.y < 0 ? -1f : 1f;
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, groundCheckDistance * gravityDir));
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(primaryWallCheck.position, primaryWallCheck.position + new Vector3(wallCheckDistance * facingDir, 0));
-        Gizmos.DrawLine(secondaryWallCheck.position, secondaryWallCheck.position + new Vector3(wallCheckDistance * facingDir, 0));
     }
 }
