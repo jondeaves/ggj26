@@ -204,15 +204,14 @@ public class Player : MonoBehaviour
         knockbackTimer = 0f;
         knockbackTarget = new Vector2(transform.position.x - knockbackDistance, transform.position.y);
 
-        // TODO: Hurt animation
+        anim.SetBool("isHurt", true);
     }
 
     private void FinishKnockback()
     {
         currentState = PlayerState.Idle;
-        
-        // TODO: Running animation
-    }
+		anim.SetBool("isHurt", false);
+	}
 
     private void OnDrawGizmos()
     {
